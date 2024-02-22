@@ -60,9 +60,9 @@ const ProductList = () => {
     const footer = `In total there are ${products ? products.length : 0} products.`;
 
     return (
-        <div className="card mb-5">
-            <Card className=''>
-                <DataTable value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
+        <div className="mb-5">
+            <Card>
+                <DataTable className='' value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
                     <Column field="name" header="Nome"></Column>
                     <Column header="Imagem" body={imageBodyTemplate}></Column>
                     <Column field="price" header="Preço" body={priceBodyTemplate}></Column>

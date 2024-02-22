@@ -27,7 +27,7 @@ const GoBack = () => {
     }, []);
 
     return (
-        <div className={`fixed bottom-4 right-4 z-10 ${isVisible ? 'opacity-100' : 'opacity-0 hidden'}`} transition-all duration-300 ease-in-out>
+        <div className={`fixed bottom-4 right-4 z-10 ${isVisible ? 'opacity-100 transition-all duration-300 ease-in-out' : 'opacity-0 hidden'}`}>
             <Button icon="pi pi-arrow-up" rounded raised className='bg-white' onClick={handleGoBackClick} />
         </div>
     );

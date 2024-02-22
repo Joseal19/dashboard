@@ -8,12 +8,14 @@ export default function BasicDemo() {
         {
             label: 'Graficos',
             icon: 'pi pi-chart-bar',
-            url: '#graficos'
+            url: '#graficos',
+            id: 1
         },
         {
             label: 'Produtos',
             icon: 'pi pi-shopping-bag',
-            url: '#produtos'
+            url: '#produtos',
+            id: 2
         },
     ];
     const end = (
