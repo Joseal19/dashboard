@@ -1,7 +1,15 @@
 # Loja Style
 
-Um WebApp de venda de produtos, prevendo as seguintes telas:
-1. Dashboard simples com listagem de produtos e graficos.
+Um WebApp para venda de produtos, com uma interface intuitiva e funcional. Inclui um dashboard simples que oferece uma lista de produtos, permitindo aos usuários adicionar itens ao carrinho, removê-los e visualizar gráficos informativos.
+
+## Funcionalidades
+
+- **Dashboard Simples:**
+  - Lista de produtos disponíveis para compra.
+  - Opções para adicionar/remover produtos do carrinho.
+  - Gráficos informativos para uma análise visual dos dados.
+
+![Texto Alternativo](styleLoja.png)
 
 ## Tecnologias utilizadas
 
