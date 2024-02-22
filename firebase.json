@@ -1,7 +1,6 @@
 {
   "hosting": {
-    "public": "public",
-    "site": "lojastyled",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
