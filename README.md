@@ -14,7 +14,8 @@ Um WebApp para venda de produtos, com uma interface intuitiva e funcional. Inclu
 ## Tecnologias utilizadas
 
  - React 
- - TypeScript 
+ - TypeScript
+ - TailwindCSS
  - Prime React
  - Firebase
 
