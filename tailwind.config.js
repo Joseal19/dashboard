@@ -14,9 +14,6 @@ module.exports = {
       width: {
         95: '95%',
       },
-      backgroundColor: { 
-        capeta: '#000',
-      },
     },
   },
   plugins: [],
