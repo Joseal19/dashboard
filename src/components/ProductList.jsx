@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
-import { Tag } from 'primereact/tag';
 import { ProductService } from '../service/ProductService';
 import { Card } from 'primereact/card';
 
@@ -16,39 +14,20 @@ const ProductList = () => {
     }, []);
 
     const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     };
 
-    const imageBodyTemplate = (product) => {
-        return <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.image} className="w-6rem shadow-2 border-round" />;
+    const getImagePath = (imageName) => {
+        try {
+            return require(`../assets/img/${imageName}`).default;
+        } catch (error) {
+            console.error(`Erro ao carregar imagem: ${imageName}`);
+            return null;
+        }
     };
 
     const priceBodyTemplate = (product) => {
         return formatCurrency(product.price);
-    };
-
-    const ratingBodyTemplate = (product) => {
-        return <Rating value={product.rating} readOnly cancel={false} />;
-    };
-
-    const statusBodyTemplate = (product) => {
-        return <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>;
-    };
-
-    const getSeverity = (product) => {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
-
-            case 'LOWSTOCK':
-                return 'warning';
-
-            case 'OUTOFSTOCK':
-                return 'danger';
-
-            default:
-                return null;
-        }
     };
 
     const header = (
@@ -58,17 +37,13 @@ const ProductList = () => {
         </div>
     );
     const footer = `In total there are ${products ? products.length : 0} products.`;
-
     return (
         <div className="mb-5">
             <Card>
                 <DataTable className='' value={products} header={header} footer={footer} tableStyle={{ minWidth: '60rem' }}>
                     <Column field="name" header="Nome"></Column>
-                    <Column header="Imagem" body={imageBodyTemplate}></Column>
+                    <Column header="Imagem" body={(rowData) => <img src={getImagePath(rowData.image)} alt={rowData.name} />} />
                     <Column field="price" header="Preço" body={priceBodyTemplate}></Column>
-                    <Column field="category" header="Categoria"></Column>
-                    <Column field="rating" header="Reviews" body={ratingBodyTemplate}></Column>
-                    <Column header="Status" body={statusBodyTemplate}></Column>
                 </DataTable>
             </Card>
         </div>

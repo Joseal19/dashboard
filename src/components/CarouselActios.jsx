@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'primereact/button';
 import { Carousel } from 'primereact/carousel';
 import { Tag } from 'primereact/tag';
@@ -7,7 +7,6 @@ import ShoppingCart from './ShoppingCart';
 import { ProductService } from '../service/ProductService';
 import { Card } from 'primereact/card';
 import { useToast } from '../components/ToastProvider';
-
 const CarouselActions = () => {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,6 +18,14 @@ const CarouselActions = () => {
     const adicionarAoCarrinho = (produto) => {
         setCarrinho([...carrinho, produto]);
         showToast({ severity: 'success', summary: 'Carrinho', detail: 'Produto adicionado ao carrinho!' });
+    };
+
+    const formatCurrency = (value) => {
+        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    };
+
+    const priceBodyTemplate = (product) => {
+        return formatCurrency(product.price);
     };
 
     // opcoes responsivas para o componente Carousel
@@ -58,20 +65,30 @@ const CarouselActions = () => {
         }
     };
 
+    const getImagePath = (imageName) => {
+        try {
+          return require(`../assets/img/${imageName}`);
+        } catch (error) {
+          console.error(`Erro ao carregar imagem: ${error}`);
+          return null;
+        }
+    };
+    
     // efeito para carregar os produtos pequenos ao montar o componente
     useEffect(() => {
         ProductService.getProductsSmall().then((data) => setProducts(data.slice(0, 9)));
     }, []);
 
     const productTemplate = (product, index) => {
+        const imagePath = getImagePath(product.image); 
         return (
             <div key={index} className="surface-border rounded border-gray-600 border-spacing-2 border m-2 text-center py-5 text-gray-600">
                 <div className="mb-3 flex justify-center">
-                    <img src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} className="w-1/2 shadow-2" />
+                <img src={imagePath} alt={product.name} className="w-1/2 shadow-2" />
                 </div>
                 <div>
                     <h4 className="mb-1">{product.name}</h4>
-                    <h6 className="mt-0 mb-3">${product.price}</h6>
+                    <h6 className="mt-0 mb-3">{priceBodyTemplate(product)}</h6>
                     <Tag value={product.inventoryStatus} severity={getSeverity(product)}></Tag>
                     <div className="mt-5 flex flex-wrap gap-2 justify-center">
                         <Button icon="pi pi-search" className="p-button p-button-rounded rounded border-gray-600 border" onClick={() => openDialog(product)} />

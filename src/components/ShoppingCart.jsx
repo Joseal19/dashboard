@@ -18,6 +18,20 @@ const ShoppingCart = ({ produtosNoCarrinho, removerDoCarrinho }) => {
         return produtosNoCarrinho.reduce((total, produto) => total + produto.price, 0).toFixed(2);
     };
 
+    // Função para construir o link do WhatsApp com os produtos e valores do pedido
+    const buildWhatsAppLink = () => {
+        const mensagem = `Olá, gostaria de fazer o seguinte pedido:\n`;
+        const produtos = produtosNoCarrinho.map(produto => `${produto.name} - R$ ${produto.price.toLocaleString('pt-BR')}`).join('\n');
+        const total = `\nTotal: R$ ${calcularTotal().toLocaleString('pt-BR')}`;
+    
+        // Número de telefone do WhatsApp
+        const numeroWhatsApp = '5544999108873';
+    
+        // Montando o link
+        const link = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem + produtos + total)}`;
+        return link;
+    };    
+
     return (
         <div>
             <div>
@@ -42,6 +56,11 @@ const ShoppingCart = ({ produtosNoCarrinho, removerDoCarrinho }) => {
                         <li className='flex justify-between mt-4 font-bold'>
                             <span>Total:</span>
                             <span>${calcularTotal()}</span>
+                        </li>
+                        <li className='mt-4'>
+                            <a href={buildWhatsAppLink()} target="_blank" rel="noopener noreferrer">
+                                <Button label="Enviar Pedido via WhatsApp" className="p-button-success" />
+                            </a>
                         </li>
                     </ul>
                 ) : (
