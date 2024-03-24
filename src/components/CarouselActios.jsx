@@ -117,6 +117,7 @@ const CarouselActions = () => {
         setCarrinho(novosProdutos);
     };
 
+
     return (
         <div className='h-full w-full'>
             <Card className='h-full bg-[#f9fafb]'>
@@ -130,8 +131,8 @@ const CarouselActions = () => {
                         <div className='flex justify-center col-span-1 sm:col-span-2 mt-5'>
                             <h2>{selectedProduct.name}</h2>
                         </div>
-                        <div className='flex justify-center col-span-1 sm:col-span-2'>
-                            <img src={`https://primefaces.org/cdn/primereact/images/product/${selectedProduct.image}`} alt={selectedProduct.name} className="drop-shadow-xl rounded-md shadow-2" />
+                        <div className='flex justify-center w-1/2 col-span-1 sm:col-span-2'>
+                            <img src={getImagePath(selectedProduct.image)} alt={selectedProduct.name} className="drop-shadow-xl rounded-md shadow-2" />
                         </div>
                         <p>Descrição: {selectedProduct.description}</p>
                         <p>Preço: ${selectedProduct.price}</p>
